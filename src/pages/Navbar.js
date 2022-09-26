@@ -6,7 +6,6 @@ import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
-  console.log();
   const signoutBtn = () => {
     signOut(auth).then(() => {
       console.log("sign out successfully");
@@ -31,9 +30,12 @@ const Navbar = () => {
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <ul class="navbar-nav d-flex gap-3 mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
               <Link to="/">Home</Link>
+            </li>
+            <li class="nav-item active">
+              <Link to="/selectedTopic">Selected Topics</Link>
             </li>
           </ul>
         </div>

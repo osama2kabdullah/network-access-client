@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [vTopics, setVtopics] = useState([]);
@@ -20,12 +21,17 @@ const Home = () => {
       .then((data) => setVtopics(data));
   }, [currentpage]);
 
+  //hndlTopicDetail
+  const navigate = useNavigate();
+  const hndlTopicDetail = (id) => {
+    navigate('/topicdetail/'+id)
+  }
   return (
     <div>
       <h1>Home</h1>
       <div style={{display: 'grid', gridTemplateColumns: 'auto auto auto auto', gap: '3em', margin: '4em'}}>
         {vTopics.map((data) => (
-          <div class="card">
+          <div onClick={()=>hndlTopicDetail(data?._id)} class="card">
             <img src={data.picture} class="card-img-top" alt="..." />
             <div class="card-body">
               <p class="card-text">
