@@ -5,7 +5,7 @@ const Home = () => {
   //availbale data
   const [page, setpage] = useState([]);
   useEffect(()=> {
-    fetch('http://localhost:5000/dataQuantity')
+    fetch('https://sleepy-brushlands-75204.herokuapp.com/dataQuantity')
     .then(res=>res.json())
     .then(data=>{
         setpage(data.result);
@@ -13,8 +13,9 @@ const Home = () => {
   },[])
   //pagination
   const [currentpage, setCurrentpage] = useState(0);
+  console.log(currentpage);
   useEffect(() => {
-    fetch(`http://localhost:5000/volenteerTopics?page=${currentpage}`)
+    fetch(`https://sleepy-brushlands-75204.herokuapp.com/volenteerTopics?page=${currentpage}`)
       .then((res) => res.json())
       .then((data) => setVtopics(data));
   }, [currentpage]);
