@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,11 +7,11 @@ const Home = () => {
   //availbale data
   const [page, setpage] = useState([]);
   useEffect(()=> {
-    fetch('https://sleepy-brushlands-75204.herokuapp.com/dataQuantity')
-    .then(res=>res.json())
-    .then(data=>{
-        setpage(data.result);
-    })
+    const loadAllData = async () => {
+      const {data} = await axios.get('https://sleepy-brushlands-75204.herokuapp.com/dataQuantity');
+      setpage(data.result);
+    }
+    loadAllData();
   },[])
   //pagination
   const [currentpage, setCurrentpage] = useState(0);

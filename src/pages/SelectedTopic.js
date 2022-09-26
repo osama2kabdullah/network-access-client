@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import auth from "../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
+import axios from "axios";
 
 const SelectedTopic = () => {
   const [user] = useAuthState(auth);
   const [datas, setDatas] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://sleepy-brushlands-75204.herokuapp.com/selectedtopics?email=" +
-        user?.email
-    )
-      .then((res) => res.json())
-      .then((data) => setDatas(data));
-  }, []);
+    if (user?.email) {
+      const loadUserSelectedData = async () => {
+        const { data } = await axios(
+          "https://sleepy-brushlands-75204.herokuapp.com/selectedtopics?email=" +
+            user?.email
+        );
+        console.log(data);
+        setDatas(data);
+      };
+      loadUserSelectedData();
+    }
+  }, [user?.email]);
   return (
     <div>
       <h2>selected topic {datas?.length}</h2>
-      <div className="d-grid mx-5" style={{gridTemplateColumns: 'auto auto auto', gap:'5em'}}>
+      <div
+        className="d-grid mx-5"
+        style={{ gridTemplateColumns: "auto auto auto", gap: "5em" }}
+      >
         {datas.map((data) => (
           <div class="card">
             <img src={data?.picture} class="card-img" alt="..." />

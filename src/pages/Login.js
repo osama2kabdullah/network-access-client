@@ -2,21 +2,24 @@ import React from "react";
 import auth from "../firebase.init";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [signInWithGoogle] = useSignInWithGoogle(auth);
-
-  const hendlGoogleLogin = () => {
-    signInWithGoogle();
-  };
   
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   if (user) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
+  const hendlGoogleLogin = async () => {
+    await signInWithGoogle();
+    const {data} = await axios.post('http://localhost:5000/login', {email: user?.email});
+    localStorage.setItem('accessToken', data?.accessToken)
+  };
+  
   return (
     <div
       style={{
