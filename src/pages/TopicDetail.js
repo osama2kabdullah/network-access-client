@@ -8,7 +8,7 @@ const TopicDetail = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const { tpicId } = useParams();
-  
+
   const [data, setData] = useState({});
   useEffect(() => {
     fetch("https://sleepy-brushlands-75204.herokuapp.com/topicdetail/" + tpicId)
@@ -41,38 +41,42 @@ const TopicDetail = () => {
         }
       });
   };
-  
+
   const match = [];
   const [selectedData, setSelectedData] = useState([]);
   for (const index in selectedData) {
     // console.log(selectedData[index].picture);
     // console.log(data.picture);
-    if(selectedData[index].picture === data.picture){
+    if (selectedData[index].picture === data.picture) {
       match.push(data.picture);
     }
   }
   console.log(match.length);
-  
+
   //load email base data
   useEffect(() => {
     if (user?.email) {
       const loadUserSelectedData = async () => {
         const { data } = await axios.get(
           "https://sleepy-brushlands-75204.herokuapp.com/selectedtopics?email=" +
-            user?.email, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            }
+            user?.email,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
         );
         setSelectedData(data);
       };
       loadUserSelectedData();
     }
   }, [user?.email]);
-  
+
   return (
-    <div class="card mb-3" style={{ maxWidth: "540px" }}>
+    <div
+      class="card mb-3"
+      style={{ maxWidth: "540px", margin: "auto", marginTop: "10vh" }}
+    >
       <div class="row g-0">
         <div class="col-md-4">
           <img src={data?.picture} class="img-fluid rounded-start" alt="..." />
@@ -81,13 +85,15 @@ const TopicDetail = () => {
           <div class="card-body">
             <h5 class="card-title">Title</h5>
             <p class="card-text">{data?.about}</p>
-{
-  match.length ? <button class="btn btn-primary" disabled>
-  Already selected
-</button>:<button onClick={hndleAddToDb} class="btn btn-primary">
-  Select this topic
-</button>
-}
+            {match.length ? (
+              <button class="btn btn-primary" disabled>
+                Already selected
+              </button>
+            ) : (
+              <button onClick={hndleAddToDb} class="btn btn-primary">
+                Select this topic
+              </button>
+            )}
           </div>
         </div>
       </div>
