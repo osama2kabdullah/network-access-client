@@ -12,7 +12,7 @@ const Home = () => {
       setpage(data.result);
     }
     loadAllData();
-  },[])
+  },[]);
   //pagination
   const [currentpage, setCurrentpage] = useState(0);
   console.log(currentpage);
