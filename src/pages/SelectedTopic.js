@@ -9,11 +9,14 @@ const SelectedTopic = () => {
   useEffect(() => {
     if (user?.email) {
       const loadUserSelectedData = async () => {
-        const { data } = await axios(
+        const { data } = await axios.get(
           "https://sleepy-brushlands-75204.herokuapp.com/selectedtopics?email=" +
-            user?.email
+            user?.email, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }
         );
-        console.log(data);
         setDatas(data);
       };
       loadUserSelectedData();

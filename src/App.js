@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import TopicDetail from "./pages/TopicDetail";
 import SelectedTopic from "./pages/SelectedTopic";
+import RequireAuth from "./pages/RequireAuth";
 
 function App() {
   return (
@@ -17,7 +18,14 @@ function App() {
           path="/topicdetail/:tpicId"
           element={<TopicDetail></TopicDetail>}
         ></Route>
-        <Route path="/selectedTopic" element={<SelectedTopic></SelectedTopic>}></Route>
+        <Route
+          path="/selectedTopic"
+          element={
+            <RequireAuth>
+              <SelectedTopic></SelectedTopic>
+            </RequireAuth>
+          }
+        ></Route>
       </Routes>
     </div>
   );
