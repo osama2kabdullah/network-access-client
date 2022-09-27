@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./pages/Home";
-import Navbar from "./pages/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import TopicDetail from "./pages/TopicDetail";
@@ -12,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
