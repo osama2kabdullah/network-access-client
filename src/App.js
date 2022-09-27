@@ -6,10 +6,12 @@ import Login from "./pages/Login";
 import TopicDetail from "./pages/TopicDetail";
 import SelectedTopic from "./pages/SelectedTopic";
 import RequireAuth from "./pages/RequireAuth";
+import Header from "./pages/Header";
 
 function App() {
   return (
     <div className="App">
+      <Header></Header>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
