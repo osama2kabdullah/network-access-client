@@ -15,7 +15,7 @@ const Header = () => {
     }
   return (
     <div className="header">
-      <img width={200} src={Group1329} alt="" />
+      <Link to='/'><img width={200} src={Group1329} alt="logo" /></Link>
       <nav>
         <CustomLink to="/">Home</CustomLink>
         <CustomLink to="/donation">Donation</CustomLink>

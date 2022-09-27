@@ -17,3 +17,14 @@
 .search-bar {
   width: 30%;
 }
+.selected-box {
+  padding: 1em;
+  border: none;
+  background-color: #ddd;
+  border-radius: 12px;
+}
+.selected-box-footer {
+  bottom: 6%;
+  right: 3%;
+  position: absolute;
+}

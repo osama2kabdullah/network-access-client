@@ -23,41 +23,51 @@ const SelectedTopic = () => {
       loadUserSelectedData();
     }
   }, [user?.email]);
-  
+
   //delete topic
-  const deleteTopic = id => {
-    const procced = window.confirm('deleting??')
-    if(procced){
-      fetch('https://sleepy-brushlands-75204.herokuapp.com/delete/'+id, {
-      method: 'DELETE'
-    })
-    .then(res=>res.json())
-    .then(data=>console.log(data));
-    //rm from ui
-    const rest = datas.filter(data=>data?._id !== id);
-    setDatas(rest);
+  const deleteTopic = (id) => {
+    const procced = window.confirm("deleting??");
+    if (procced) {
+      fetch("https://sleepy-brushlands-75204.herokuapp.com/delete/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+      //rm from ui
+      const rest = datas.filter((data) => data?._id !== id);
+      setDatas(rest);
     }
-  }
-  
+  };
+
   return (
     <div>
-      <h2>selected topic {datas?.length}</h2>
+      <h2 className="text-center">You selected {datas?.length} topics</h2>
       <div
-        className="d-grid mx-5"
+        className="d-grid mx-5 mt-5"
         style={{ gridTemplateColumns: "auto auto auto", gap: "5em" }}
       >
         {datas.map((data) => (
-          <div class="card" style={{width: '18rem'}}>
-            <img src={data?.picture} class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <button onClick={()=>deleteTopic(data?._id)} class="btn btn-primary">
-                Delete trhis topic
-              </button>
+          <div class="float-right card selected-box">
+            <div class="row">
+              <div class="col-sm-5">
+                <img class="d-block w-100" src={data?.picture} alt="" />
+              </div>
+              <div class="col-sm-7">
+                <div class="card-block">
+                  {/* <!--           <h4 class="card-title">Small card</h4> --> */}
+                  <p>Copy paste the HTML and CSS.</p>
+                  <p>Change around the content for awsomenes</p>
+                  <br />
+                  <div className="selected-box-footer">
+                  <button
+                    onClick={() => deleteTopic(data?._id)}
+                    class="btn btn-secondary"
+                  >
+                    Delete trhis topic
+                  </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
